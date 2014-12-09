@@ -95,7 +95,7 @@ body
 #map-request-DAGO,
 #map-request-BANDUNG
 {
-	background: rgb(192, 0, 0);
+	background: rgb(153, 0, 0);
 }
 
 #map-request-HSADIKIN,
@@ -103,10 +103,10 @@ body
 #map-request-DJUANDA,
 #map-request-CICENDO
 {
-	background: rgb(255, 192, 0);
+	background: rgb(204, 153, 0);
 }
 
 #map-request-GSATE
 {
-	background: rgb(146, 208, 80);
+	background: rgb(107, 165, 44);
 }

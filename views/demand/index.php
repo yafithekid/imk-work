@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\DemandSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Daftar Permintaan Bantuan';
+$this->title = 'Permintaan Bantuan';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="demand-index">

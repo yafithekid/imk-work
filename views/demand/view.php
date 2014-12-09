@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Demand */
 
 $this->title = "Permintaan telah dikirim";
-$this->params['breadcrumbs'][] = ['label' => 'Daftar Permintaan Bantuan', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Permintaan Bantuan', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="demand-view col-xs-5">

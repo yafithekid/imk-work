@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\Demand */
 
 $this->title = 'Minta Bantuan';
-$this->params['breadcrumbs'][] = ['label' => 'Daftar Permintaan Bantuan', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Permintaan Bantuan', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="demand-create">
