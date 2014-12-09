@@ -8,8 +8,8 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="user-form col-xs-12">
-<div class='col-xs-4 col-xs-offset-4'>
+<div class="user-form col-xs-5">
+<br/>
     <?php $form = ActiveForm::begin(); ?>
 
     <!-- <span class='glyphicon glyphicon-lock'></span> -->
@@ -27,11 +27,10 @@ use yii\widgets\ActiveForm;
    
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Tambah' : 'Ubah', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Tambah' : 'Ubah', ['class' => $model->isNewRecord ? 'btn btn-primary' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-</div>
 </div>
 <!--
 <div class="user-form">

@@ -18,8 +18,8 @@ class AidSearch extends Aid
     public function rules()
     {
         return [
-            [['id', 'stock'], 'integer'],
-            [['name'], 'safe'],
+            [['id', 'stock','category_id'], 'integer'],
+            [['name','category_id'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class AidSearch extends Aid
      */
     public function search($params)
     {
-        $query = Aid::find();
+        $query = Aid::find()->orderBy(['name' => SORT_ASC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -54,6 +54,7 @@ class AidSearch extends Aid
         $query->andFilterWhere([
             'id' => $this->id,
             'stock' => $this->stock,
+            'category_id' => $this->category_id,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

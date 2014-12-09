@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Aid */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Aids', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Bantuan', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="aid-view">

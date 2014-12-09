@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $model app\models\Aid */
 
 $this->title = 'Ubah Bantuan: ' . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Aids', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Bantuan', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Ubah';
 ?>
 <div class="aid-update">
 

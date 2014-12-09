@@ -34,10 +34,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'password', 'rules','repeat_password','name'], 'required','message'=>'tidak boleh kosong'],
+            [['username', 'password', 'rules','repeat_password','name'], 'required'],
             [['rules'], 'string'],
             [['username', 'password','repeat_password','name'], 'string', 'max' => 500],
-            [['repeat_password'],'compare','compareAttribute'=>'password','message'=>'password tidak sama']
+            [['repeat_password'],'compare','compareAttribute'=>'password']
         ];
     }
 

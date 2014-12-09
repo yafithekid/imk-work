@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="aid-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->rules == User::ADMIN) :?>
     <p>
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -40,12 +40,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->stock." ".$model->unit;
                 }
             ],
-            [
-                'label' => 'Kategori',
-                'value' => function($model){
-                    return $model->category->name;
-                }
-            ],
+            // [
+            //     'label' => 'Kategori',
+            //     'value' => function($model){
+            //         return $model->category->name;
+            //     }
+            // ],
             [
                 'label' => 'Aksi',
                 'value' => function($model) {
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Html::a('Ubah',$url);
                         },
                         'delete' => function($url,$model,$key){
-                            return Html::a('Hapus',$url);
+                            return Html::a('Hapus',$url,['data'=>['method'=>'post','confirm'=>"Apakah anda ingin menghapus $model->name? "]]);
                         }
                     ]
                 
@@ -77,3 +77,30 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 </div>
+<div id="dataConfirmModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                <h5 id="dataConfirmLabel">Konfirmasi Hapus</h5></div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <a class="btn btn-danger" id="dataConfirmOK">OK</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('a[data-confirm]').click(function(ev) {
+        var href = $(this).attr('href');
+        $('#dataConfirmModal').find('.modal-body').text($(this).attr('data-confirm'));
+        $('#dataConfirmOK').attr('href', href);
+        $('#dataConfirmModal').modal({show:true});
+        return false;
+    });
+});
+</script>

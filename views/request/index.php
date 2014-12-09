@@ -103,8 +103,18 @@ $requests = array(
 	<body style="height:100%">
 		
 		<div class="container-map" style="height:500px;">
-			<div id="map-canvas" ></div><div class="map-panel">
-				Panel
+			<div id="map-canvas"></div>
+			<div class='map-panel'>
+				<h4 style='text-align:center'>Panel Konfirmasi</h4>
+				<table class='table-condensed table-striped'>
+					<tr><td>Lokasi</td><td id='panel-lokasi'></td></tr>
+					<tr><td>Peminta</td><td id='panel-peminta'></td></tr>
+					<tr><td>Deadline</td><td id='panel-deadline'></td></tr>
+					<tr><td>Bantuan</td><td id='panel-bantuan'></td></tr>	
+						
+				</table>
+				<br/>
+				<button class='btn btn-primary'>Kirim</button>
 			</div>
 			
 			<div class="map-requests">
@@ -249,8 +259,30 @@ $requests = array(
 				
 				function showPanel(name) {
 					return function(){
-						alert(name + " show");
+						if (name == 'ITB'){
+							updatePanelData('ITB','PMI','12 Desember 2014','200 kg batu bata, 1000 bungkus indomi');
+						} else if (name == 'UNIKOM') {
+							updatePanelData('UNIKOM','PMI','12 Desember 2014','400 kg batu bata, 400 bungkus indomi');
+						} else if (name == 'GSATE') {
+							updatePanelData('Gedung Sate','BPBD','16 Desember 2014','400 kg batu bata, 400 bungkus indomi');
+						} else if (name == 'BIP') {
+							updatePanelData('BIP','Pemda','15 Desember 2014','100 kg batu bata, 50 bungkus indomi');
+						} else if (name =='HSADIKIN'){
+							updatePanelData('RS Hasan Sadikin','RS Hasan Sadikin','14 Desember 2014','500 kg batu bata, 400 bungkus indomi');
+						} else if (name == 'DAGO') {
+							updatePanelData('Dago','PMI','14 Desember 2014','600 kg batu bata, 1400 bungkus indomi');
+						} else if (name == 'DJUANDA') {
+							updatePanelData('Jalan Juanda','Pemda','15-16 Desember 2014','500 kg batu bata, 450 bungkus indomi');
+						} else if (name == 'CICENDO') {
+							updatePanelData('Cicendo','RS Hasan Sadikin','14 Desember 2014','500 kg batu bata, 400 bungkus indomi');
+						} else if (name == 'BANDUNG') {
+							updatePanelData('Bandung','Bandung','12 - 16 Desember 2014','1600 kg batu bata, 1400 bungkus indomi');
+						}
 					}
+					
+					//return function(){
+					//	//alert(name + " show");
+				//	}
 				}
 				
 				google.maps.event.addDomListener(document.getElementById('map-request-ITB'), 'click', showPanel('ITB'));
@@ -278,6 +310,13 @@ $requests = array(
 
 			google.maps.event.addDomListener(window, 'load', initialize);
 		})();
+
+		function updatePanelData(lokasi,peminta,deadline,bantuan){
+			$("#panel-lokasi").text(lokasi);
+			$("#panel-peminta").text(peminta);
+			$("#panel-deadline").text(deadline);
+			$("#panel-bantuan").text(bantuan);
+		}
 		</script>
 	</body>
 </html>

@@ -20,7 +20,7 @@ class DemandController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    'delete' => ['post','get'],
                 ],
             ],
         ];
@@ -61,6 +61,7 @@ class DemandController extends Controller
     public function actionCreate($aid_id = 0)
     {
         $model = new Demand();
+        $model->date = '2014-12-10';
         $model->aid_id = $aid_id;
         if ($model->load(Yii::$app->request->post()) && $model->aid_id != 0 && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

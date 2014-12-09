@@ -40,7 +40,7 @@ AppAsset::register($this);
                         ['label' => '<span class="glyphicon glyphicon-th-list"></span> Daftar Pengguna', 'url' => ['/user/index']],
                         //['label' => '<span class="glyphicon glyphicon-user"></span> Tambah Pengguna', 'url' => ['/user/create']],
                         ['label' => '<span class="glyphicon glyphicon-briefcase"></span> Stok Bantuan', 'url' => ['/aid/index']],
-                        ['label' => '<span class="glyphicon glyphicon-screenshot"></span> Lihat Kondisi', 'url' => ['/request/view']],
+                        ['label' => '<span class="glyphicon glyphicon-screenshot"></span> Lihat Kondisi', 'url' => ['/request/index']],
                     ],
                     'encodeLabels' => false
                 ]);
@@ -102,13 +102,6 @@ AppAsset::register($this);
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-bottom">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> </a>
-                    <ul class="dropdown-menu" role="menu">
-                    </ul>
-                </li>
-            </ul>
         </div>
 
     </div>

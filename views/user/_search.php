@@ -8,26 +8,21 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="user-search">
-
+<div class="user-search col-xs-offset-6">
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
-
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'username') ?>
-
-    <?= $form->field($model, 'password') ?>
-
-    <?= $form->field($model, 'email') ?>
-
-    <?= $form->field($model, 'rules') ?>
-
+    <div class='col-xs-4'>
+     <?= Html::activeTextInput($model,'name',['class'=>'form-control','placeholder'=>'cari nama...']);  ?>
+    </div>
+    <div class='col-xs-4'>
+     <?= Html::activeDropDownList($model,'rules',[''=>'Semua peran', 'admin' => 'Admin', 'pemerintah' => 'Pemerintah', 'relawan' => 'Relawan', ],['class'=>'form-control']); ?>
+    </div>
+   
+   
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('Cari', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
