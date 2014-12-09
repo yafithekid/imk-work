@@ -2,102 +2,94 @@
 
 namespace app\models;
 
-class User extends \yii\base\Object implements \yii\web\IdentityInterface
-{
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
+use Yii;
 
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
+/**
+ * This is the model class for table "user".
+ *
+ * @property integer $id
+ * @property string $username
+ * @property string $password
+ * @property string $email
+ * @property string $rules
+ */
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+{
+    const ADMIN = 'admin';
+    const PEMERINTAH = 'pemerintah';
+    const RELAWAN = 'relawan';
+    
+    public $repeat_password;
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'user';
+    }
 
     /**
      * @inheritdoc
      */
+    public function rules()
+    {
+        return [
+            [['username', 'password', 'rules','repeat_password','name'], 'required','message'=>'tidak boleh kosong'],
+            [['rules'], 'string'],
+            [['username', 'password','repeat_password','name'], 'string', 'max' => 500],
+            [['repeat_password'],'compare','compareAttribute'=>'password','message'=>'password tidak sama']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'username' => 'Username',
+            'password' => 'Password',
+            'rules' => 'Peran',
+            'name' => 'Nama',
+            'repeat_password' => 'Ulangi Password',
+        ];
+    }
+
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return User::findOne($id);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Finds user by username
-     *
-     * @param  string      $username
-     * @return static|null
-     */
     public static function findByUsername($username)
     {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return User::find()->where(['username' => $username])->one();
+    }
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        throw new Exception("Unsupported operation exception");
     }
 
-    /**
-     * @inheritdoc
-     */
+    public static function getAllSeller() {
+        return User::find()->where(['is_seller' => 1])->all();
+    }
+
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return null;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function validateAuthKey($authKey)
     {
         return $this->authKey === $authKey;
     }
 
-    /**
-     * Validates password
-     *
-     * @param  string  $password password to validate
-     * @return boolean if password provided is valid for current user
-     */
-    public function validatePassword($password)
-    {
-        return $this->password === $password;
+    public function validatePassword($password){
+        return $this->password == $password;
     }
 }

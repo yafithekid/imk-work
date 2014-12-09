@@ -8,6 +8,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\User;
+
 
 class SiteController extends Controller
 {
@@ -49,7 +51,8 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->redirect(['user/index']);
+        //return $this->render('index');
     }
 
     public function actionLogin()
@@ -60,6 +63,13 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            if (Yii::$app->user->identity->rules == User::ADMIN){
+                return $this->redirect(['/user/index']);
+            } else if (Yii::$app->user->identity->rules == User::RELAWAN){
+                return $this->redirect(['/aid/index']);
+            } else {
+                return $this->redirect(['/request/distribution']);
+            }
             return $this->goBack();
         } else {
             return $this->render('login', [
@@ -71,8 +81,8 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
-        return $this->goHome();
+        return $this->redirect('login');
+        //return $this->goHome();
     }
 
     public function actionContact()

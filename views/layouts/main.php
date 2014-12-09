@@ -4,6 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\models\User;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -26,18 +27,49 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'My Company',
+                'brandLabel' => 'SIMBAT',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
                 ],
             ]);
+            if (!Yii::$app->user->isGuest && Yii::$app->user->identity->rules == User::ADMIN):
+                echo Nav::widget([
+                    'options' => ['class' => 'navbar-nav navbar-left'],
+                    'items' => [
+                        ['label' => '<span class="glyphicon glyphicon-th-list"></span> Daftar Pengguna', 'url' => ['/user/index']],
+                        //['label' => '<span class="glyphicon glyphicon-user"></span> Tambah Pengguna', 'url' => ['/user/create']],
+                        ['label' => '<span class="glyphicon glyphicon-briefcase"></span> Stok Bantuan', 'url' => ['/aid/index']],
+                        ['label' => '<span class="glyphicon glyphicon-screenshot"></span> Lihat Kondisi', 'url' => ['/request/view']],
+                    ],
+                    'encodeLabels' => false
+                ]);
+            endif;
+
+            if (!Yii::$app->user->isGuest && Yii::$app->user->identity->rules == User::RELAWAN):
+                echo Nav::widget([
+                    'options' => ['class' => 'navbar-nav navbar-left'],
+                    'items' => [
+                        ['label' => '<span class="glyphicon glyphicon-th-list"></span> Daftar Bantuan', 'url' => ['/aid/index']],
+                        //['label' => '<span class="glyphicon glyphicon-question-sign"></span> Bantuan Tidak Terdaftar', 'url' => ['/aid/create']],
+                    ],
+                    'encodeLabels' => false
+                ]);
+            endif;
+
+            if (!Yii::$app->user->isGuest && Yii::$app->user->identity->rules == User::PEMERINTAH):
+                echo Nav::widget([
+                    'options' => ['class' => 'navbar-nav navbar-left'],
+                    'items' => [
+                        ['label' => '<span class="glyphicon glyphicon-th-list"></span> Peta Distribusi', 'url' => ['/request/index',]],
+                    ],
+                    'encodeLabels' => false
+                ]);
+            endif;
+
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
-                    ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'About', 'url' => ['/site/about']],
-                    ['label' => 'Contact', 'url' => ['/site/contact']],
                     Yii::$app->user->isGuest ?
                         ['label' => 'Login', 'url' => ['/site/login']] :
                         ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
@@ -48,7 +80,7 @@ AppAsset::register($this);
             NavBar::end();
         ?>
 
-        <div class="container">
+        <div class="container" style='height:100%'>
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
@@ -56,12 +88,39 @@ AppAsset::register($this);
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-            <p class="pull-right"><?= Yii::powered() ?></p>
+<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+    <div class="container-fluid">
+    
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-bottom">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <p class="navbar-text" href="#"><span id="currentDateTime"></span></p>
         </div>
-    </footer>
+
+        <div class="collapse navbar-collapse" id="navbar-bottom">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> </a>
+                    <ul class="dropdown-menu" role="menu">
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+<script type="text/javascript">
+    var currentDateTime = document.getElementById('currentDateTime');
+    function updateCurrentDateTime() {
+        currentDateTime.innerHTML = new Date().toLocaleString();
+    }
+    updateCurrentDateTime();
+    setInterval(updateCurrentDateTime, 1000);
+</script>
 
 <?php $this->endBody() ?>
 </body>

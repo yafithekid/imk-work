@@ -1,0 +1,105 @@
+/* Font stack */
+body
+{
+	font-family: 'Segoe UI', 'Segoe', 'Optima', sans-serif;
+}
+
+/* Ruang untuk navbar-fixed-top dan navbar-fixed-bottom */
+body
+{
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+html,
+body
+{
+	height: 100%;
+}
+
+.container-map
+{
+	position: relative;
+	height: 100%;
+}
+
+.map-panel
+{
+	background: #333;
+	color: #9d9d9d;
+	width: 25%;
+	height: 100%;
+	float: right;
+	margin: 0;
+	padding: 1.25%;
+	text-align: center;
+}
+
+#map-canvas
+{
+	float: left;
+	width: 75%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.map-request
+{
+	background: #000;
+	box-shadow: 7px 7px 21px rgba(0, 0, 0, 0.25);
+	color: #fff;
+	display: inline-block;
+	font-size: 14px;
+	margin: 0;
+	padding: 1em;
+	position: absolute;
+	text-align: center;
+}
+
+.map-request:after {
+    content:'';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+	margin-left: -15px;
+    width: 0;
+    height: 0;
+    border-top: solid 15px #000;
+    border-left: solid 15px transparent;
+    border-right: solid 15px transparent;
+}
+
+.map-request-name
+{
+	font-size: 21px;
+	font-weight: 700;
+}
+
+.map-request-list
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#map-request-ITB,
+#map-request-UNIKOM,
+#map-request-DAGO,
+#map-request-BANDUNG
+{
+	background: rgb(192, 0, 0);
+}
+
+#map-request-HSADIKIN,
+#map-request-BIP,
+#map-request-DJUANDA,
+#map-request-CICENDO
+{
+	background: rgb(255, 192, 0);
+}
+
+#map-request-GSATE
+{
+	background: rgb(146, 208, 80);
+}
